@@ -8,12 +8,13 @@ public class CardGameManager : MonoBehaviour
     [SerializeField] Sprite[] sprite;
     SpriteRenderer spriteRender;
 
-    int ran;
+    //int ran;
     int count;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        ran = Random.Range(0, 2);
+        //ran = Random.Range(0, 2);
 
         spriteRender = card.GetComponent<SpriteRenderer>();
     }
@@ -21,7 +22,7 @@ public class CardGameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(ran == 0)
+/*        if(ran == 0)
         {
         }
         else
@@ -31,7 +32,12 @@ public class CardGameManager : MonoBehaviour
         {
             Instantiate(card);
             count++;
-        }
+        }*/
+      
+    }
+
+    void ChangeNumvber(int ran)
+    {
         switch (ran)
         {
             case 0:
@@ -47,7 +53,7 @@ public class CardGameManager : MonoBehaviour
                 spriteRender.sprite = sprite[3];
                 break;
             case 4:
-                 spriteRender.sprite = sprite[4];
+                spriteRender.sprite = sprite[4];
                 break;
             case 5:
                 spriteRender.sprite = sprite[5];
@@ -70,6 +76,10 @@ public class CardGameManager : MonoBehaviour
             case 11:
                 spriteRender.sprite = sprite[11];
                 break;
+            case 12:
+                spriteRender.sprite = sprite[12];
+                break;
         }
     }
+
 }
