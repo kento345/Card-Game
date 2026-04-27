@@ -8,9 +8,10 @@ public class RandomController : MonoBehaviour
 
     public void Random(int x, int y)
     {
-        if (isLoop)
+        while (isLoop)
         {
-           //ran = Mathf.PingPong(Time.time * 2,x - y) + y;
+            
         }
+           //ran = Mathf.PingPong(Time.time * 2,x - y) + y;
     }
 }
