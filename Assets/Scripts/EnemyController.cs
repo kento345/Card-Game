@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class EnemyController : MonoBehaviour
 {
     [SerializeField] GameObject manager;
     int ranM;
@@ -17,20 +17,12 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(count <= 2)
+        if (count <= 2)
         {
             ranM = Random.Range(0, 4);
             ranN = Random.Range(0, 13);
-            cardManager.ChangeNumvber(ranM, ranN, this.gameObject);
+            cardManager.DealerChangeNumvber(ranM, ranN, this.gameObject);
             count++;
         }
-
-       
     }
-
-    public void SetCard(int N)
-    {
-
-    }
-
 }

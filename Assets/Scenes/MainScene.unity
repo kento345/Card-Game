@@ -163,6 +163,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20178abd3c90dac48a514b0d9e5c0997, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  manager: {fileID: 386346990}
 --- !u!1 &203844586
 GameObject:
   m_ObjectHideFlags: 0
@@ -336,7 +337,49 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   card: {fileID: 1161316520901189200, guid: ad5eb9189bfbad14181a282c45234353, type: 3}
-  sprite:
+  Ssprite:
+  - {fileID: -9170840628983556327, guid: 544dae6ec16c12045999f5b5596f7610, type: 3}
+  - {fileID: 7549143809956675629, guid: 95fa6ebecc4145b4f937fec3e19f6291, type: 3}
+  - {fileID: 5124179087590154771, guid: 8065d1a9c595f6b40b41299452b95a19, type: 3}
+  - {fileID: 6696100908219653719, guid: b7b74ea8ef484924f932d6f6d485ac47, type: 3}
+  - {fileID: -8603141614839821661, guid: 29c2ed5e4380fb7428f1527a39af6307, type: 3}
+  - {fileID: -5834083481070006841, guid: 4ea66fad63764b248a3beee3532e7487, type: 3}
+  - {fileID: 5597145320613020062, guid: c13caf99e7741b8499091869f1bbd59a, type: 3}
+  - {fileID: 8347581028001077578, guid: 716f15b7044791748b7705155c153fe9, type: 3}
+  - {fileID: 1600390102795091093, guid: ab94efc0750dd17408105ab72e3ba157, type: 3}
+  - {fileID: 132502090559369358, guid: 20a3c23489b36a848b705fe397c5c4e3, type: 3}
+  - {fileID: 1551109507416115885, guid: 1f80b21493738664d8e08c3c4afb2e30, type: 3}
+  - {fileID: 2163105015294799856, guid: d07312acb2c61884e9e2fadb03e28bbe, type: 3}
+  - {fileID: -2586876529714385939, guid: 3f008fe161b596c49a3f4f9d6832b367, type: 3}
+  Dsprite:
+  - {fileID: 346651516169218579, guid: d6b8ee3a33fd5b04a8b916b07550ac02, type: 3}
+  - {fileID: -2902220078603823398, guid: bd19b7feedbfabd41a142a6b77ef1c6b, type: 3}
+  - {fileID: 6639765473966753130, guid: 2f621c7543aed584b9180c13e979286e, type: 3}
+  - {fileID: 5576825445541013115, guid: 39e54d44f836d4e4e8949cad8af71209, type: 3}
+  - {fileID: -4823707794982729431, guid: 3d72fb0b572001d42b73988662ed707f, type: 3}
+  - {fileID: -4323193302434912658, guid: 3b030c43ba23a3542843a31f869f3afe, type: 3}
+  - {fileID: 1394001068510185279, guid: ffed0ddd011a6344fa82fdd36529f579, type: 3}
+  - {fileID: -4322763767127128999, guid: 76019e6e9623ca54384a43a60586852d, type: 3}
+  - {fileID: 113956047308426749, guid: b44e9ba37ca82564cb51d1254b0ec497, type: 3}
+  - {fileID: -7984129372773853026, guid: 72ff1fab281e7ca40865cc7873aadc22, type: 3}
+  - {fileID: -6361470639365674727, guid: 27d8186d31dbdda468c27763bad9ff09, type: 3}
+  - {fileID: 4427191720712031663, guid: 385c99adc9d52e441a9bba68574777a2, type: 3}
+  - {fileID: 280633155710113452, guid: 2af4f6969ba4a6b45ad8851fb48ccff5, type: 3}
+  Hsprite:
+  - {fileID: 1332497004716992060, guid: 05ace087fa0436d43aae4257e9555d84, type: 3}
+  - {fileID: 1846677931886285916, guid: dba8ce614f1a2994682e3dc02e0104f1, type: 3}
+  - {fileID: -6499467846180881992, guid: 5ffd09cdb34cd634b9dda64a3a9c2479, type: 3}
+  - {fileID: -4925794144187447390, guid: a930ad12679a1f24a8733b58963816ed, type: 3}
+  - {fileID: 1627425870851149089, guid: a6024422b73d8774f883c11c10fe2e90, type: 3}
+  - {fileID: -8661580602680086107, guid: 27eb54027c0958141af1715a7201409f, type: 3}
+  - {fileID: 8478454487564873025, guid: ad386b4545594d748be304f70213bbc3, type: 3}
+  - {fileID: -8729194218740381472, guid: e69cf5df34821c0488876cc2e7805163, type: 3}
+  - {fileID: -3208036393101263427, guid: 7534db02d1d95634fa5c015845fb2ee0, type: 3}
+  - {fileID: -7201274916688777907, guid: 061cf55097823f644bf2852f3642ff8c, type: 3}
+  - {fileID: -7162767756950457667, guid: 1a0429ebae00e6b43bf706ff102b5c5c, type: 3}
+  - {fileID: -8552510808413893689, guid: d2ff0776f9ce34b4d916dae2dbab286e, type: 3}
+  - {fileID: -7187644187445921280, guid: 3977f6f1f82bd124ca5bf8d26341a22f, type: 3}
+  Ksprite:
   - {fileID: 8247581766725238505, guid: 7880b69ff607a494bbd5d5d43db93fb5, type: 3}
   - {fileID: 7709452414331882691, guid: 9877ac17d37497d419429e87862560ce, type: 3}
   - {fileID: -7719532502650388547, guid: 9dd55e31894fcaf4683c6655df223048, type: 3}
@@ -348,8 +391,8 @@ MonoBehaviour:
   - {fileID: -5112337014537983774, guid: c7c57900081ce9b4ba743e51dc79e3f0, type: 3}
   - {fileID: -8434555174964071281, guid: 763824c69ad2bdd4cbd346d2c7290b86, type: 3}
   - {fileID: 6042176709118852840, guid: d4279d15aa8ff7d4b8b87b0df44bbc33, type: 3}
-  - {fileID: -6675019034400255153, guid: 3949da6d026795548946d49e8ac526af, type: 3}
   - {fileID: 3506898522710357277, guid: 116274ddcc2092a4babf42af0ec273ba, type: 3}
+  - {fileID: -6675019034400255153, guid: 3949da6d026795548946d49e8ac526af, type: 3}
 --- !u!114 &386346993
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -578,6 +621,51 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1767432190
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1767432191}
+  - component: {fileID: 1767432192}
+  m_Layer: 0
+  m_Name: Enemy
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1767432191
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1767432190}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 3.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1767432192
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1767432190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb7dc1593493dad4194d628c2401d7e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  manager: {fileID: 386346990}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -587,3 +675,4 @@ SceneRoots:
   - {fileID: 386346991}
   - {fileID: 1232442738}
   - {fileID: 150644756}
+  - {fileID: 1767432191}
