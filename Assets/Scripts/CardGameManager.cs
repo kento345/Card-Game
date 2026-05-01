@@ -93,13 +93,13 @@ public class CardGameManager : MonoBehaviour
         if (Ecount <= 1)
         {
             var Dpos = obj.transform.position;
-            Instantiate(card,new Vector2(Dpos.x + Ecount,Dpos.y),Quaternion.identity);
-            Ecount++;
+            var rot = Quaternion.identity;
             if (Ecount == 1)
             {
-                Instantiate(card, new Vector2(Dpos.x + Ecount, Dpos.y), Quaternion.Euler(0,180,0));
-                Ecount++;
+                rot = Quaternion.Euler(0, 180, 0);
             }
+            Instantiate(card,new Vector2(Dpos.x + Ecount,Dpos.y),rot);
+            Ecount++;
         }
     }
 

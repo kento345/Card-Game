@@ -5,6 +5,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject manager;
     int ranM;
     int ranN;
+    int curentNum;
     int count;
 
     CardGameManager cardManager;
@@ -22,10 +23,10 @@ public class PlayerController : MonoBehaviour
             ranM = Random.Range(0, 4);
             ranN = Random.Range(0, 13);
             cardManager.ChangeNumvber(ranM, ranN, this.gameObject);
+            //curentNum = ranN + 1;
             count++;
+            Debug.Log(curentNum);
         }
-
-       
     }
 
     public void SetCard(int N)
