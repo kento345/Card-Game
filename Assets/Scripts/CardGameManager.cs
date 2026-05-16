@@ -42,7 +42,9 @@ public class CardGameManager : MonoBehaviour
         SetCard(x,y);
         if (Ecount <= 1)
         {
-            var Epos = obj.transform.position;
+            //var Epos = obj.transform.position;
+            var Epos = transform.position;
+
             var rot = Quaternion.identity;
             if (Ecount == 1)
             {
