@@ -37,7 +37,7 @@ public class CardGameManager : MonoBehaviour
       
     }
 
-    public virtual void EnemyChangeNumvber(int x,int y, GameObject obj)
+    public virtual void EnemyChangeNumvber(int x, int y, GameObject obj)
     {
         SetCard(x,y);
         if (Ecount <= 1)

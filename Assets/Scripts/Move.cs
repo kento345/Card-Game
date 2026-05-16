@@ -18,5 +18,6 @@ public class Move : MonoBehaviour
     void Update()
     {
         transform.position = Vector2.SmoothDamp(transform.position, targetPos, ref velocity, speed);
+        //transform.Rotate(0,0,speed);
     }
 }
