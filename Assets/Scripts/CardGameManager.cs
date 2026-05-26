@@ -22,8 +22,9 @@ public class CardGameManager : MonoBehaviour
     SpriteRenderer spriteRender;
     int Ecount = 0;
     int Pcount = 0;
+    //-----------------
 
-    private Vector3 velocity = Vector3.zero;
+    //private Vector3 velocity = Vector3.zero;
 
 
     void Start()
@@ -60,7 +61,8 @@ public class CardGameManager : MonoBehaviour
         SetCard(x,y);
         if (Pcount <= 1)
         {
-            var Ppos = obj.transform.position;
+            //var Ppos = obj.transform.position;
+            var Ppos = transform.position;
             GameObject a = Instantiate(card, new Vector2(Ppos.x + Pcount, Ppos.y), Quaternion.identity);
             //a.transform.position = Vector3.SmoothDamp(transform.position, new Vector2(obj.transform.position.x + Pcount, obj.transform.position.y), ref velocity, 0.3f);
             Pcount++;

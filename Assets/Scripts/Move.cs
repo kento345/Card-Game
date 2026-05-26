@@ -11,7 +11,7 @@ public class Move : MonoBehaviour
 
     void Start()
     {
-        targetPos = new Vector2(transform.position.x ,transform.position .y + 10 );
+        targetPos = new Vector2(transform.position.x ,-transform.position .y + 10 );
     }
 
     // Update is called once per frame
