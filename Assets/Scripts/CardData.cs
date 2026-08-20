@@ -7,7 +7,7 @@ using UnityEngine;
 )]
 public class CardData : ScriptableObject
 {
-    [SerializeField] FF ff_;
-    [SerializeField] AA aa_;
+    [SerializeField] Suit suit_;
+    [SerializeField] Number number_;
     [SerializeField] Sprite sprite_;
 }

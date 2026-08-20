@@ -23,10 +23,8 @@ public class PlayerController : MonoBehaviour
         if (context.performed)
         {
             isStart = true;
-            if (enemyController != null)
-            {
-                enemyController.IsStart(true);
-            }
+            SetCard();
+
         }
     }
 
@@ -38,7 +36,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        SetCard();
+        //SetCard();
     }
 
     void SetCard()
@@ -47,10 +45,7 @@ public class PlayerController : MonoBehaviour
         {
             for (int i = 0; i <= 1; i++)
             {
-                ranM = Random.Range(0, 4);
-                ranN = Random.Range(0, 13);
-                cardManager.ChangeNumvber(ranM, ranN, this.gameObject);
-                curentNum += ranN + 1;
+                cardManager.ChangeNumvber(this.gameObject.transform.position, i, true);
             }
             isStart = false;
         }

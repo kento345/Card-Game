@@ -3,44 +3,39 @@ using System.Collections.Generic;
 using UnityEngine;
 using static UnityEngine.Rendering.DebugUI.Table;
 
-enum FF
+enum Suit
 {
-    h,s,c,d
+    Spade, Heart, Diamond, Club
 };
 
-enum AA
+enum Number
 {
-    One
-}
+    Ace,Two,Three,Four,Five,Six,Seven,
+    Eight,Nine,Ten,Jack,Queen,King
+};
 
-public class CardList
+/*public class CardList
 {
-    FF ff_;
-}
+    Suit suit_;
+}*/
 
 [System.Serializable]
-public class CardDataList : CardList
+public class CardDataList /*: CardList*/
 {
     [SerializeField]List<CardData> data_ = new();
 }
 
 public class CardGameManager : MonoBehaviour
 {
-    [SerializeField] GameObject Pcard;
-    [SerializeField] GameObject Ecard;
+    [SerializeField] GameObject card;
     [SerializeField] List<Sprite> Ssprite;
     [SerializeField] List<Sprite> Dsprite;
     [SerializeField] List<Sprite> Hsprite;
     [SerializeField] List<Sprite> Ksprite;
 
-    [SerializeField] List<CardDataList> cordsp;
+    [SerializeField] List<CardDataList> cardData;
 
-    private List<Sprite> sprite;
-    //private Sprite[] sprite;
-    SpriteRenderer PspriteRender;
-    //SpriteRenderer EspriteRender;
-    int Ecount = 0;
-    int Pcount = 0;
+    SpriteRenderer spriteRender;
     //-----------------
 
     //private Vector3 velocity = Vector3.zero;
@@ -48,49 +43,30 @@ public class CardGameManager : MonoBehaviour
 
     void Start()
     {
-        PspriteRender = Pcard.GetComponent<SpriteRenderer>();
-        //EspriteRender = Ecard.GetComponent<SpriteRenderer>();
+        spriteRender = card.GetComponent<SpriteRenderer>();
     }
 
-    public virtual void EnemyChangeNumvber(int x, int y, GameObject obj)
+    public void ChangeNumvber(Vector3 obj,int i,bool player)
     {
-        SetCard(x,y);
-        if (Ecount <= 1)
+        if (i <= 1)
         {
-            //var Epos = obj.transform.position;
-            var Epos = transform.position;
+            var pos = transform.position;
 
             var a = SpownCard();
-            if(Ecount == 1)
+            if(!player && i == 1)
             {
                 a.transform.rotation = Quaternion.Euler(0, 180, 0);
             }
             a.transform.position = transform.position;
 
-
-            CardMove.CardMve(a, new Vector3(0, -10, 0), 2);
-            Ecount++;
-        }
-    }
-
-    public void ChangeNumvber(int x,int y, GameObject obj)
-    {
-        SetCard(x,y);
-        if (Pcount <= 1)
-        {
-            //var Ppos = obj.transform.position;
-            var Ppos = transform.position;
-            GameObject a = Instantiate(Pcard, new Vector2(Ppos.x + Pcount, Ppos.y), Quaternion.identity);
-            
-            //a.transform.position = Vector3.SmoothDamp(transform.position, new Vector2(obj.transform.position.x + Pcount, obj.transform.position.y), ref velocity, 0.3f);
-            Pcount++;
+            CardMove.CardMve(a, new Vector3(pos.x + i, obj.y, 0), 0.5f);
         }
     }
 
    GameObject SpownCard()
     {
         var num = CardNum();
-        var g = Instantiate(Ecard, new Vector3(0, 0, 0), Quaternion.identity);
+        var t = Instantiate(card, new Vector3(0, 0, 0), Quaternion.identity);
 
         Sprite sp = Ssprite[num.Item2];
         switch (num.Item1)
@@ -109,41 +85,13 @@ public class CardGameManager : MonoBehaviour
                 break;
         }
 
-        g.GetComponent<SpriteRenderer>().sprite = sp;
+        t.GetComponent<SpriteRenderer>().sprite = sp;
 
-        return g;
+        return t;
     }
 
     (int,int) CardNum()
     {
         return (Random.Range(0, 4), Random.Range(0, 13));
-    }
-
-
-    void SetCard(int x,int y)
-    {
-        switch (x)
-        {
-            case 0:
-                sprite = Ssprite;
-                break;
-            case 1:
-                sprite = Dsprite;
-                break;
-            case 2:
-                sprite = Hsprite;
-                break;
-            case 3:
-                sprite = Ksprite;
-                break;
-        }
-        if (sprite != null)
-        {
-            if (!sprite.Contains(sprite[y])) { return; }
-
-            PspriteRender.sprite = sprite[y];
-
-            sprite.Remove(sprite[y]);
-        }
     }
 }

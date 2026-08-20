@@ -10,9 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2453462189052964402}
   - component: {fileID: 6205999987149101457}
-  - component: {fileID: 4088347441313299829}
   m_Layer: 0
-  m_Name: ECard
+  m_Name: Card
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -83,7 +82,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 113956047308426749, guid: b44e9ba37ca82564cb51d1254b0ec497, type: 3}
+  m_Sprite: {fileID: -4322763767127128999, guid: 76019e6e9623ca54384a43a60586852d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -93,18 +92,6 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!114 &4088347441313299829
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1161316520901189200}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92d374dc9892a4745937e2d2be485a60, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnemyMove
 --- !u!1 &5416627049511844038
 GameObject:
   m_ObjectHideFlags: 0
