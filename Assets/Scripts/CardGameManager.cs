@@ -1,25 +1,44 @@
+using NUnit.Framework;
 using System.Collections.Generic;
-using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEngine.Rendering.DebugUI.Table;
 
+enum FF
+{
+    h,s,c,d
+};
 
+enum AA
+{
+    One
+}
+
+public class CardList
+{
+    FF ff_;
+}
+
+[System.Serializable]
+public class CardDataList : CardList
+{
+    [SerializeField]List<CardData> data_ = new();
+}
 
 public class CardGameManager : MonoBehaviour
 {
-    [SerializeField] GameObject card;
-    /*[SerializeField] Sprite[] Ssprite;
-      [SerializeField] Sprite[] Dsprite;
-      [SerializeField] Sprite[] Hsprite;
-      [SerializeField] Sprite[] Ksprite;*/
+    [SerializeField] GameObject Pcard;
+    [SerializeField] GameObject Ecard;
     [SerializeField] List<Sprite> Ssprite;
     [SerializeField] List<Sprite> Dsprite;
     [SerializeField] List<Sprite> Hsprite;
     [SerializeField] List<Sprite> Ksprite;
 
+    [SerializeField] List<CardDataList> cordsp;
+
     private List<Sprite> sprite;
     //private Sprite[] sprite;
-    SpriteRenderer spriteRender;
+    SpriteRenderer PspriteRender;
+    //SpriteRenderer EspriteRender;
     int Ecount = 0;
     int Pcount = 0;
     //-----------------
@@ -29,13 +48,8 @@ public class CardGameManager : MonoBehaviour
 
     void Start()
     {
-        spriteRender = card.GetComponent<SpriteRenderer>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-      
+        PspriteRender = Pcard.GetComponent<SpriteRenderer>();
+        //EspriteRender = Ecard.GetComponent<SpriteRenderer>();
     }
 
     public virtual void EnemyChangeNumvber(int x, int y, GameObject obj)
@@ -46,12 +60,15 @@ public class CardGameManager : MonoBehaviour
             //var Epos = obj.transform.position;
             var Epos = transform.position;
 
-            var rot = Quaternion.identity;
-            if (Ecount == 1)
+            var a = SpownCard();
+            if(Ecount == 1)
             {
-                rot = Quaternion.Euler(0, 180, 0);
+                a.transform.rotation = Quaternion.Euler(0, 180, 0);
             }
-            Instantiate(card,new Vector2(Epos.x + Ecount,Epos.y),rot);
+            a.transform.position = transform.position;
+
+
+            CardMove.CardMve(a, new Vector3(0, -10, 0), 2);
             Ecount++;
         }
     }
@@ -63,11 +80,46 @@ public class CardGameManager : MonoBehaviour
         {
             //var Ppos = obj.transform.position;
             var Ppos = transform.position;
-            GameObject a = Instantiate(card, new Vector2(Ppos.x + Pcount, Ppos.y), Quaternion.identity);
+            GameObject a = Instantiate(Pcard, new Vector2(Ppos.x + Pcount, Ppos.y), Quaternion.identity);
+            
             //a.transform.position = Vector3.SmoothDamp(transform.position, new Vector2(obj.transform.position.x + Pcount, obj.transform.position.y), ref velocity, 0.3f);
             Pcount++;
         }
     }
+
+   GameObject SpownCard()
+    {
+        var num = CardNum();
+        var g = Instantiate(Ecard, new Vector3(0, 0, 0), Quaternion.identity);
+
+        Sprite sp = Ssprite[num.Item2];
+        switch (num.Item1)
+        {
+            case 0:
+                sp = Ssprite[num.Item2];
+                break;
+            case 1:
+                sp = Dsprite[num.Item2];
+                break;
+            case 2:
+                sp = Hsprite[num.Item2];
+                break;
+            case 3:
+                sp = Ksprite[num.Item2];
+                break;
+        }
+
+        g.GetComponent<SpriteRenderer>().sprite = sp;
+
+        return g;
+    }
+
+    (int,int) CardNum()
+    {
+        return (Random.Range(0, 4), Random.Range(0, 13));
+    }
+
+
     void SetCard(int x,int y)
     {
         switch (x)
@@ -88,50 +140,10 @@ public class CardGameManager : MonoBehaviour
         if (sprite != null)
         {
             if (!sprite.Contains(sprite[y])) { return; }
-            switch (y)
-            {
-                case 0:
-                    spriteRender.sprite = sprite[0];
-                    break;
-                case 1:
-                    spriteRender.sprite = sprite[1];
-                    break;
-                case 2:
-                    spriteRender.sprite = sprite[2];
-                    break;
-                case 3:
-                    spriteRender.sprite = sprite[3];
-                    break;
-                case 4:
-                    spriteRender.sprite = sprite[4];
-                    break;
-                case 5:
-                    spriteRender.sprite = sprite[5];
-                    break;
-                case 6:
-                    spriteRender.sprite = sprite[6];
-                    break;
-                case 7:
-                    spriteRender.sprite = sprite[7];
-                    break;
-                case 8:
-                    spriteRender.sprite = sprite[8];
-                    break;
-                case 9:
-                    spriteRender.sprite = sprite[9];
-                    break;
-                case 10:
-                    spriteRender.sprite = sprite[10];
-                    break;
-                case 11:
-                    spriteRender.sprite = sprite[11];
-                    break;
-                case 12:
-                    spriteRender.sprite = sprite[12];
-                    break;
-            }
+
+            PspriteRender.sprite = sprite[y];
+
             sprite.Remove(sprite[y]);
         }
     }
-
 }

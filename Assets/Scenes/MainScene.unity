@@ -456,7 +456,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2f9f0919e0e886429745f94c99f5f11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  card: {fileID: 1161316520901189200, guid: ad5eb9189bfbad14181a282c45234353, type: 3}
+  Pcard: {fileID: 1161316520901189200, guid: ad5eb9189bfbad14181a282c45234353, type: 3}
+  Ecard: {fileID: 1161316520901189200, guid: 4adc8095c8cac3a41803fdccc8a5e32b, type: 3}
   Ssprite:
   - {fileID: -9170840628983556327, guid: 544dae6ec16c12045999f5b5596f7610, type: 3}
   - {fileID: 7549143809956675629, guid: 95fa6ebecc4145b4f937fec3e19f6291, type: 3}
@@ -513,6 +514,9 @@ MonoBehaviour:
   - {fileID: 6042176709118852840, guid: d4279d15aa8ff7d4b8b87b0df44bbc33, type: 3}
   - {fileID: -6675019034400255153, guid: 3949da6d026795548946d49e8ac526af, type: 3}
   - {fileID: 3506898522710357277, guid: 116274ddcc2092a4babf42af0ec273ba, type: 3}
+  cordsp:
+  - data_:
+    - {fileID: 11400000, guid: 13ff78f830a45724da147d62d03ae98b, type: 2}
 --- !u!114 &386346993
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -897,7 +901,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1985586418}
   - component: {fileID: 1985586417}
-  - component: {fileID: 1985586419}
   m_Layer: 0
   m_Name: w
   m_TagString: Untagged
@@ -979,18 +982,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1985586419
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1985586416}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5b8c0ec7f24aa544b781f9d07496443, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
