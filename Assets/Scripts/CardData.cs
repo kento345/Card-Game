@@ -1,3 +1,5 @@
+using NUnit.Framework;
+using System.Collections.Generic;
 using UnityEngine;
 
 
@@ -10,4 +12,5 @@ public class CardData : ScriptableObject
     [SerializeField] Suit suit_;
     [SerializeField] Number number_;
     [SerializeField] Sprite sprite_;
+    bool isUsed = false;
 }

@@ -512,8 +512,7 @@ MonoBehaviour:
   - {fileID: 6042176709118852840, guid: d4279d15aa8ff7d4b8b87b0df44bbc33, type: 3}
   - {fileID: -6675019034400255153, guid: 3949da6d026795548946d49e8ac526af, type: 3}
   - {fileID: 3506898522710357277, guid: 116274ddcc2092a4babf42af0ec273ba, type: 3}
-  cardData:
-  - data_: []
+  cardData: []
 --- !u!1 &451304679
 GameObject:
   m_ObjectHideFlags: 0

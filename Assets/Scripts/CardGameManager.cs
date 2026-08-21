@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using NUnit.Framework;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,13 +14,15 @@ enum Number
     Eight,Nine,Ten,Jack,Queen,King
 };
 
-/*public class CardList
+public class CardList
 {
     Suit suit_;
-}*/
+    Number number_;
+    //bool isUsed;
+}
 
 [System.Serializable]
-public class CardDataList /*: CardList*/
+public class CardDataList
 {
     [SerializeField]List<CardData> data_ = new();
 }
