@@ -165,7 +165,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   manager: {fileID: 386346990}
-  enemy: {fileID: 1767432190}
 --- !u!114 &150644758
 MonoBehaviour:
   m_ObjectHideFlags: 0
