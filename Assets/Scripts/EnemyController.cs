@@ -1,3 +1,4 @@
+using System.Collections;
 using Unity.Hierarchy;
 using UnityEngine;
 
@@ -7,6 +8,8 @@ public class EnemyController : MonoBehaviour
     int ranM;
     int ranN;
     int curentNum;
+    int i = 0;
+
 
     bool isStrt = false;
 
@@ -21,19 +24,22 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        SetCard();
+        StartCoroutine(SetCard());
     }
-    void SetCard()
+    IEnumerator SetCard()
     {
-        if (isStrt)
+        if (isStrt && i <= 1)
         {
-            for (int i = 0; i <= 1; i++)
+            cardManager.ChangeNumvber(this.gameObject.transform.position, i, false);
+            /*for (int i = 0; i <= 1; i++)
             {
-                cardManager.ChangeNumvber(this.gameObject.transform.position,i,false);
                 curentNum += ranN + 1;
-            }
+            }*/
+            i++;
             isStrt = false;
+            yield return new WaitUntil(() => !isStrt);
         }
+        isStrt = true;
     }
 
     public void IsStart(bool x)

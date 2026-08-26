@@ -1,14 +1,16 @@
 using JetBrains.Annotations;
 using NUnit.Framework;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
-enum Suit
+public enum Suit
 {
     Spade, Heart, Diamond, Club
 };
 
-enum Number
+public enum Number
 {
     Ace,Two,Three,Four,Five,Six,Seven,
     Eight,Nine,Ten,Jack,Queen,King
@@ -24,76 +26,90 @@ public class CardList
 [System.Serializable]
 public class CardDataList
 {
-    [SerializeField]List<CardData> data_ = new();
+    [SerializeField] public List<CardData> data_ = new();
 }
 
 public class CardGameManager : MonoBehaviour
 {
+    /// <summary>
+    /// カードデータ
+    /// </summary>
+    [SerializeField] List<CardDataList> cardDatas;
+
+    /// <summary>
+    /// カードPrefab
+    /// </summary>
     [SerializeField] GameObject card;
-    [SerializeField] List<Sprite> Ssprite;
-    [SerializeField] List<Sprite> Dsprite;
-    [SerializeField] List<Sprite> Hsprite;
-    [SerializeField] List<Sprite> Ksprite;
 
-    [SerializeField] List<CardDataList> cardData;
-
-    SpriteRenderer spriteRender;
+    /// <summary>
+    /// 使用カードデータ
+    /// </summary>
+    private List<CardDataList> cardList = new();
     //-----------------
-
-    //private Vector3 velocity = Vector3.zero;
-
 
     void Start()
     {
-        spriteRender = card.GetComponent<SpriteRenderer>();
+        AddList();
     }
 
-    public void ChangeNumvber(Vector3 obj,int i,bool player)
+    /// <summary>
+    /// カード生成後移動
+    /// </summary>
+    /// <param name="obj"></param>
+    /// <param name="i"></param>
+    /// <param name="player"></param>
+    public IEnumerator ChangeNumvber(Vector3 obj,int i,bool player)
     {
-        if (i <= 1)
+        var pos = transform.position;
+
+        var a = SpownCard();
+        if (!player && i == 1)
         {
-            var pos = transform.position;
-
-            var a = SpownCard();
-            if(!player && i == 1)
-            {
-                a.transform.rotation = Quaternion.Euler(0, 180, 0);
-            }
-            a.transform.position = transform.position;
-
-            CardMove.CardMve(a, new Vector3(pos.x + i, obj.y, 0), 0.5f);
+            a.transform.rotation = Quaternion.Euler(0, 180, 0);
         }
+        a.transform.position = transform.position;
+
+        CardMove.CardMve(a, new Vector3(pos.x + i, obj.y, 0), 0.5f);
+
+        yield return new WaitForSeconds(1);
     }
 
-   GameObject SpownCard()
-    {
-        var num = CardNum();
+    /// <summary>
+    /// カードの生成
+    /// </summary>
+    /// <returns></returns>
+    GameObject SpownCard()
+   {
+        var data = CardNum();
+        if(data == null) { return null; }
         var t = Instantiate(card, new Vector3(0, 0, 0), Quaternion.identity);
+        t.GetComponent<SpriteRenderer>().sprite = data.SpriteData();
 
-        Sprite sp = Ssprite[num.Item2];
-        switch (num.Item1)
-        {
-            case 0:
-                sp = Ssprite[num.Item2];
-                break;
-            case 1:
-                sp = Dsprite[num.Item2];
-                break;
-            case 2:
-                sp = Hsprite[num.Item2];
-                break;
-            case 3:
-                sp = Ksprite[num.Item2];
-                break;
-        }
-
-        t.GetComponent<SpriteRenderer>().sprite = sp;
-
+        //cardList.Remove();
         return t;
+   }
+
+    /// <summary>
+    /// 使用するカード情報をランダム
+    /// </summary>
+    /// <returns></returns>
+    CardData CardNum()
+    {
+        var list = cardList[Random.Range(0,cardList.Count)];
+        int index = Random.Range(0, list.data_.Count);
+        var data = list.data_[index];
+        list.data_.RemoveAt(index);
+        return data;
     }
 
-    (int,int) CardNum()
+    /// <summary>
+    /// 使用Listに情報追加
+    /// </summary>
+    public void AddList()
     {
-        return (Random.Range(0, 4), Random.Range(0, 13));
+        foreach(var data in cardDatas)
+        {
+            cardList.Add(data);
+        }
     }
 }

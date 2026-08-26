@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2c2c407609fc0d84195f8161cd901385, type: 3}
-  m_Name: Heart_10
+  m_Name: Diamond_6
   m_EditorClassIdentifier: Assembly-CSharp::Card
-  suit_: 1
-  number_: 9
-  sprite_: {fileID: -7201274916688777907, guid: 061cf55097823f644bf2852f3642ff8c, type: 3}
+  suit_: 2
+  number_: 5
+  sprite_: {fileID: -4323193302434912658, guid: 3b030c43ba23a3542843a31f869f3afe, type: 3}
