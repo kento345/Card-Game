@@ -16,15 +16,13 @@ public enum Number
     Eight,Nine,Ten,Jack,Queen,King
 };
 
-public class CardList
+/*public class CardList
 {
     Suit suit_;
-    Number number_;
-    //bool isUsed;
-}
+}*/
 
 [System.Serializable]
-public class CardDataList
+public class CardDataList /*: CardList*/
 {
     [SerializeField] public List<CardData> data_ = new();
 }
@@ -44,10 +42,14 @@ public class CardGameManager : MonoBehaviour
     /// <summary>
     /// 使用カードデータ
     /// </summary>
+    [SerializeField]
     private List<CardDataList> cardList = new();
     //-----------------
 
-    void Start()
+    int playerCount = 0;
+    int enemyCount = 0;
+
+    void Awake()
     {
         AddList();
     }
@@ -58,20 +60,27 @@ public class CardGameManager : MonoBehaviour
     /// <param name="obj"></param>
     /// <param name="i"></param>
     /// <param name="player"></param>
-    public IEnumerator ChangeNumvber(Vector3 obj,int i,bool player)
+    public IEnumerator ChangeNumvber(Vector3 obj,int count,bool player)
     {
+        int i = count - 1;
+        
         var pos = transform.position;
-
-        var a = SpownCard();
-        if (!player && i == 1)
+        for (int j = 0; j <= i; j++)
         {
-            a.transform.rotation = Quaternion.Euler(0, 180, 0);
+            var a = SpownCard();
+            if (a == null){yield break;}
+            if (!player && j == 1)
+            {
+                a.transform.rotation = Quaternion.Euler(0, 180, 0);
+            }
+            var rot = a.transform.rotation;
+            a.transform.position = transform.position;
+            //真偽
+            CardMove.CardMve(a, new Vector3(pos.x + (player ? playerCount : enemyCount) + j, obj.y, 0), 0.5f);
+            yield return new WaitForSeconds(0.5f);
         }
-        a.transform.position = transform.position;
-
-        CardMove.CardMve(a, new Vector3(pos.x + i, obj.y, 0), 0.5f);
-
-        yield return new WaitForSeconds(1);
+        if (player) { playerCount+= i; }
+        else { enemyCount+= i; }
     }
 
     /// <summary>
@@ -95,10 +104,30 @@ public class CardGameManager : MonoBehaviour
     /// <returns></returns>
     CardData CardNum()
     {
-        var list = cardList[Random.Range(0,cardList.Count)];
-        int index = Random.Range(0, list.data_.Count);
-        var data = list.data_[index];
-        list.data_.RemoveAt(index);
+        //残っているカードを山札に追加
+        List<CardDataList> availableLists = new();
+
+        foreach (var list in cardList)
+        {
+            if (list != null &&list.data_ != null &&list.data_.Count > 0)
+            {
+                availableLists.Add(list);
+            }
+        }
+
+        if (availableLists.Count == 0){return null;}
+
+        // カードが残っているリストから選ぶ
+        var listData = availableLists[Random.Range(0, availableLists.Count)];
+
+        // そのリストからカードを1枚選ぶ
+        int index = Random.Range(0, listData.data_.Count);
+
+        CardData data = listData.data_[index];
+
+        // 使用したカードを削除
+        listData.data_.RemoveAt(index);
+
         return data;
     }
 

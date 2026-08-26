@@ -33,22 +33,25 @@ public class PlayerController : MonoBehaviour
         cardManager = manager.GetComponent<CardGameManager>();
         enemyController = enemy.GetComponent<EnemyController>();
         isStart = true;
+        SetCard();
     }
 
     private void Update()
     {
-        SetCard();
+        //SetCard();
     }
 
     void SetCard()
     {
         if (isStart)
         {
-            for (int i = 0; i <= 1; i++)
-            {
-                cardManager.ChangeNumvber(this.gameObject.transform.position,i, true);
-            }
-            isStart = false;
+            StartCoroutine(cardManager.ChangeNumvber(this.gameObject.transform.position, 2, true));
+            //cardManager.ChangeNumvber(this.gameObject.transform.position, 2, true);
+
+            /*            for (int i = 0; i <= 1; i++)
+                        {
+                        }*/
+            //isStart = false;
         }
     }
 }

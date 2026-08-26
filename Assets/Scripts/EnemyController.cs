@@ -19,25 +19,28 @@ public class EnemyController : MonoBehaviour
     {
         cardManager = manager.GetComponent<CardGameManager>();
         isStrt = true;
+        SetCard();
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        StartCoroutine(SetCard());
+        //SetCard();
     }
-    IEnumerator SetCard()
+    void SetCard()
     {
         if (isStrt && i <= 1)
         {
-            cardManager.ChangeNumvber(this.gameObject.transform.position, i, false);
-            /*for (int i = 0; i <= 1; i++)
+            StartCoroutine(cardManager.ChangeNumvber(this.gameObject.transform.position, 2, false));
+            //cardManager.ChangeNumvber(this.gameObject.transform.position, 2, false);
+
+/*            for (int i = 0; i <= 1; i++)
             {
-                curentNum += ranN + 1;
+                //curentNum += ranN + 1;
             }*/
-            i++;
+            //i++;
             isStrt = false;
-            yield return new WaitUntil(() => !isStrt);
         }
         isStrt = true;
     }
