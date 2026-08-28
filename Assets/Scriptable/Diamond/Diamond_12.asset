@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Diamond_12
   m_EditorClassIdentifier: Assembly-CSharp::Card
   suit_: 2
-  number_: 11
+  number_: 12
   sprite_: {fileID: 280633155710113452, guid: 2af4f6969ba4a6b45ad8851fb48ccff5, type: 3}

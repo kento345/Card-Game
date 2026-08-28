@@ -1,28 +1,33 @@
-using JetBrains.Annotations;
+﻿using JetBrains.Annotations;
 using NUnit.Framework;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions.Must;
 using UnityEngine.Rendering;
 
+/// <summary>
+/// カードマーク
+/// </summary>
 public enum Suit
 {
     Spade, Heart, Diamond, Club
 };
 
+/// <summary>
+/// カード数字
+/// </summary>
 public enum Number
 {
-    Ace,Two,Three,Four,Five,Six,Seven,
+    Ace = 1,Two,Three,Four,Five,Six,Seven,
     Eight,Nine,Ten,Jack,Queen,King
 };
 
-/*public class CardList
-{
-    Suit suit_;
-}*/
-
+/// <summary>
+/// カードデータList
+/// </summary>
 [System.Serializable]
-public class CardDataList /*: CardList*/
+public class CardDataList
 {
     [SerializeField] public List<CardData> data_ = new();
 }
@@ -42,12 +47,16 @@ public class CardGameManager : MonoBehaviour
     /// <summary>
     /// 使用カードデータ
     /// </summary>
-    [SerializeField]
     private List<CardDataList> cardList = new();
     //-----------------
 
+    //カード生成数
     int playerCount = 0;
     int enemyCount = 0;
+
+    //数字
+    int playerNum = 0;
+    int enemyNum = 0;
 
     void Awake()
     {
@@ -62,12 +71,13 @@ public class CardGameManager : MonoBehaviour
     /// <param name="player"></param>
     public IEnumerator ChangeNumvber(Vector3 obj,int count,bool player)
     {
+        Debug.Log(playerCount);
         int i = count - 1;
         
         var pos = transform.position;
         for (int j = 0; j <= i; j++)
         {
-            var a = SpownCard();
+            var a = SpownCard(player);
             if (a == null){yield break;}
             if (!player && j == 1)
             {
@@ -76,7 +86,7 @@ public class CardGameManager : MonoBehaviour
             var rot = a.transform.rotation;
             a.transform.position = transform.position;
             //真偽
-            CardMove.CardMve(a, new Vector3(pos.x + (player ? playerCount : enemyCount) + j, obj.y, 0), 0.5f);
+            CardMove.CardMve(a, new Vector3(pos.x /*+ (player ? playerCount : enemyCount) */+ j, obj.y, 0), 0.5f);
             yield return new WaitForSeconds(0.5f);
         }
         if (player) { playerCount+= i; }
@@ -87,9 +97,9 @@ public class CardGameManager : MonoBehaviour
     /// カードの生成
     /// </summary>
     /// <returns></returns>
-    GameObject SpownCard()
+    GameObject SpownCard(bool p)
    {
-        var data = CardNum();
+        var data = CardNum(p);
         if(data == null) { return null; }
         var t = Instantiate(card, new Vector3(0, 0, 0), Quaternion.identity);
         t.GetComponent<SpriteRenderer>().sprite = data.SpriteData();
@@ -102,11 +112,10 @@ public class CardGameManager : MonoBehaviour
     /// 使用するカード情報をランダム
     /// </summary>
     /// <returns></returns>
-    CardData CardNum()
+    CardData CardNum(bool p)
     {
         //残っているカードを山札に追加
         List<CardDataList> availableLists = new();
-
         foreach (var list in cardList)
         {
             if (list != null &&list.data_ != null &&list.data_.Count > 0)
@@ -127,6 +136,22 @@ public class CardGameManager : MonoBehaviour
 
         // 使用したカードを削除
         listData.data_.RemoveAt(index);
+        playerNum += (int)(p ? data.NumberData() : 0);
+        enemyNum += (int)(p ? 0 : data.NumberData());
+        /*        int number = (int)data.NumberData();
+
+                Debug.Log($"カード: {data.NumberData()} / int: {number}");
+
+                if (p)
+                {
+                    playerNum += number;
+                    Debug.Log($"PLAYER → {number} / 合計 {playerNum}");
+                }
+                else
+                {
+                    enemyNum += number;
+                    Debug.Log($"ENEMY → {number} / 合計 {enemyNum}");
+                }*/
 
         return data;
     }
@@ -140,5 +165,11 @@ public class CardGameManager : MonoBehaviour
         {
             cardList.Add(data);
         }
+    }
+
+    public (int player,int enemy) Num()
+    {
+        //Debug.Log("Player:" + playerNum + "Enemy: " + enemyNum);
+        return (playerNum, enemyNum);
     }
 }

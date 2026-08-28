@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Spade_9
   m_EditorClassIdentifier: Assembly-CSharp::Card
   suit_: 0
-  number_: 8
+  number_: 9
   sprite_: {fileID: 1600390102795091093, guid: ab94efc0750dd17408105ab72e3ba157, type: 3}

@@ -1,10 +1,16 @@
+﻿using System.Collections;
 using UnityEngine;
 
 public class CharacterBase : MonoBehaviour
 {
+    //ゲームマネジャー
     [SerializeField]
     protected GameObject manager = null;
 
+    //出た数字の合計
+    protected int numberNum = 0;
+
+    //カードマネージャのScript
     CardGameManager cardManager = null;
 
     private void Awake()
@@ -12,8 +18,14 @@ public class CharacterBase : MonoBehaviour
         cardManager = manager.GetComponent<CardGameManager>();
     }
 
-    protected void SetCard(int a,bool p)
+    protected IEnumerator SetCard(int a,bool p)
     {
-        StartCoroutine(cardManager.ChangeNumvber(this.gameObject.transform.position, a, p));
+        yield return StartCoroutine(cardManager.ChangeNumvber(this.gameObject.transform.position, a, p));
+        numberNum = p ? cardManager.Num().player : cardManager.Num().enemy;
     }
+
+    public virtual void Hit(bool p)
+    {
+        StartCoroutine(cardManager.ChangeNumvber(this.gameObject.transform.position, 1, p));
+    } 
 }

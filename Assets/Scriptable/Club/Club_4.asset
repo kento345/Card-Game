@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Club_4
   m_EditorClassIdentifier: Assembly-CSharp::Card
   suit_: 3
-  number_: 3
+  number_: 4
   sprite_: {fileID: -7215425100046234149, guid: 0dcec0f68e8acb948b0d33ec4d0a6119, type: 3}

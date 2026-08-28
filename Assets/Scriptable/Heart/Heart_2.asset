@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Heart_2
   m_EditorClassIdentifier: Assembly-CSharp::Card
   suit_: 1
-  number_: 1
+  number_: 2
   sprite_: {fileID: 1846677931886285916, guid: dba8ce614f1a2994682e3dc02e0104f1, type: 3}
