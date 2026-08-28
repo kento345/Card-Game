@@ -1299,9 +1299,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Stay
-
-'
+  m_Text: 
 --- !u!222 &1559431671
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1546,9 +1544,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Hit
-
-'
+  m_Text: 
 --- !u!222 &2095963226
 CanvasRenderer:
   m_ObjectHideFlags: 0
