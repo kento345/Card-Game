@@ -70,12 +70,9 @@ public class CardGameManager : MonoBehaviour
     /// <param name="i"></param>
     /// <param name="player"></param>
     public IEnumerator ChangeNumvber(Vector3 obj,int count,bool player)
-    {
-        Debug.Log(playerCount);
-        int i = count - 1;
-        
+    {        
         var pos = transform.position;
-        for (int j = 0; j <= i; j++)
+        for (int j = 0; j <= count - 1; j++)
         {
             var a = SpownCard(player);
             if (a == null){yield break;}
@@ -86,11 +83,11 @@ public class CardGameManager : MonoBehaviour
             var rot = a.transform.rotation;
             a.transform.position = transform.position;
             //真偽
-            CardMove.CardMve(a, new Vector3(pos.x /*+ (player ? playerCount : enemyCount) */+ j, obj.y, 0), 0.5f);
+            CardMove.CardMve(a, new Vector3(pos.x + (player ? playerCount : enemyCount) + j, obj.y, pos.z - (player ? playerCount : enemyCount) - j), 0.5f);
             yield return new WaitForSeconds(0.5f);
         }
-        if (player) { playerCount+= i; }
-        else { enemyCount+= i; }
+        if (player) { playerCount += count; }
+        else { enemyCount += count; }
     }
 
     /// <summary>
@@ -138,20 +135,6 @@ public class CardGameManager : MonoBehaviour
         listData.data_.RemoveAt(index);
         playerNum += (int)(p ? data.NumberData() : 0);
         enemyNum += (int)(p ? 0 : data.NumberData());
-        /*        int number = (int)data.NumberData();
-
-                Debug.Log($"カード: {data.NumberData()} / int: {number}");
-
-                if (p)
-                {
-                    playerNum += number;
-                    Debug.Log($"PLAYER → {number} / 合計 {playerNum}");
-                }
-                else
-                {
-                    enemyNum += number;
-                    Debug.Log($"ENEMY → {number} / 合計 {enemyNum}");
-                }*/
 
         return data;
     }
@@ -169,7 +152,6 @@ public class CardGameManager : MonoBehaviour
 
     public (int player,int enemy) Num()
     {
-        //Debug.Log("Player:" + playerNum + "Enemy: " + enemyNum);
         return (playerNum, enemyNum);
     }
 }

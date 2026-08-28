@@ -1,11 +1,15 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CharacterBase : MonoBehaviour
 {
     //ゲームマネジャー
     [SerializeField]
     protected GameObject manager = null;
+
+    [SerializeField]
+    protected Text numText = null;
 
     //出た数字の合計
     protected int numberNum = 0;

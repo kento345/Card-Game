@@ -1,17 +1,20 @@
-﻿using Unity.Hierarchy;
+﻿using System.Collections;
+using Unity.Hierarchy;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerController : CharacterBase
 {
-    void Start()
+    IEnumerator Start()
     {
-        StartCoroutine(SetCard(2, true));
+        yield return StartCoroutine(SetCard(2, true));
+        numText.text = numberNum.ToString();
     }
 
     private void Update()
     {
-        if(numberNum >= 21)
+
+        if (numberNum >= 21)
         {
             Debug.LogError("バースト");
         }

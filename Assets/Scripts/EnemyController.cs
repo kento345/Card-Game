@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class EnemyController : CharacterBase
 {
-    void Start()
+    int number_ = 0;
+
+    IEnumerator Start()
     {
-        StartCoroutine(SetCard(2, false));
+        yield return StartCoroutine(SetCard(2, false));
+        numText.text = numberNum.ToString();
     }
 }
