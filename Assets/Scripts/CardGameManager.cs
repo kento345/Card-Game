@@ -57,6 +57,7 @@ public class CardGameManager : MonoBehaviour
     //数字
     int playerNum = 0;
     int enemyNum = 0;
+    int enemyNumFirst = 0;
 
     void Awake()
     {
@@ -67,36 +68,39 @@ public class CardGameManager : MonoBehaviour
     /// カード生成後移動
     /// </summary>
     /// <param name="obj"></param>
-    /// <param name="i"></param>
-    /// <param name="player"></param>
-    public IEnumerator ChangeNumvber(Vector3 obj,int count,bool player)
+    /// <param name="count"></param>
+    /// <param name="chara"></param>
+    /// <returns></returns>
+    public IEnumerator ChangeNumvber(Vector3 obj,int count,CharacterBase chara)
     {        
+        //生成場所
         var pos = transform.position;
         for (int j = 0; j <= count - 1; j++)
         {
-            var a = SpownCard(player);
-            if (a == null){yield break;}
-            if (!player && j == 1)
+            //カード情報
+            var data = DrawCard();
+            //情報を元にカード生成
+            var card = SpownCard(data);
+            //カード情報を渡す
+            chara.AddCard(data);
+            if (data == null){yield break;}
+            if (chara is EnemyController && chara.CardCount() == 2)
             {
-                a.transform.rotation = Quaternion.Euler(0, 180, 0);
+                card.transform.rotation = Quaternion.Euler(0, 180, 0);
             }
-            var rot = a.transform.rotation;
-            a.transform.position = transform.position;
-            //真偽
-            CardMove.CardMve(a, new Vector3(pos.x + (player ? playerCount : enemyCount) + j, obj.y, pos.z - (player ? playerCount : enemyCount) - j), 0.5f);
+            card.transform.position = transform.position;
+            //移動
+            CardMove.CardMve(card, new Vector3(pos.x + chara.CardCount()-1, obj.y, pos.z - chara.CardCount() + 1), 0.5f);
             yield return new WaitForSeconds(0.5f);
         }
-        if (player) { playerCount += count; }
-        else { enemyCount += count; }
     }
 
     /// <summary>
     /// カードの生成
     /// </summary>
     /// <returns></returns>
-    GameObject SpownCard(bool p)
+   GameObject SpownCard(CardData data)
    {
-        var data = CardNum(p);
         if(data == null) { return null; }
         var t = Instantiate(card, new Vector3(0, 0, 0), Quaternion.identity);
         t.GetComponent<SpriteRenderer>().sprite = data.SpriteData();
@@ -109,7 +113,7 @@ public class CardGameManager : MonoBehaviour
     /// 使用するカード情報をランダム
     /// </summary>
     /// <returns></returns>
-    CardData CardNum(bool p)
+    CardData DrawCard()
     {
         //残っているカードを山札に追加
         List<CardDataList> availableLists = new();
@@ -129,12 +133,10 @@ public class CardGameManager : MonoBehaviour
         // そのリストからカードを1枚選ぶ
         int index = Random.Range(0, listData.data_.Count);
 
-        CardData data = listData.data_[index];
+        var data = listData.data_[index];
 
         // 使用したカードを削除
         listData.data_.RemoveAt(index);
-        playerNum += (int)(p ? data.NumberData() : 0);
-        enemyNum += (int)(p ? 0 : data.NumberData());
 
         return data;
     }
@@ -150,8 +152,8 @@ public class CardGameManager : MonoBehaviour
         }
     }
 
-    public (int player,int enemy) Num()
+    public (int player, int firstEnemy, int enemy) Num()
     {
-        return (playerNum, enemyNum);
+        return (playerNum,enemyNumFirst, enemyNum);
     }
 }

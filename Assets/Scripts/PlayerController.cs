@@ -7,14 +7,14 @@ public class PlayerController : CharacterBase
 {
     IEnumerator Start()
     {
-        yield return StartCoroutine(SetCard(2, true));
-        numText.text = numberNum.ToString();
+        yield return StartCoroutine(SetCard(2));
+        SetText();
     }
 
     private void Update()
     {
 
-        if (numberNum >= 21)
+        if (number >= 21)
         {
             Debug.LogError("バースト");
         }
