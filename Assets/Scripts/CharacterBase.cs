@@ -39,6 +39,11 @@ public class CharacterBase : MonoBehaviour
         SetText();
     }
 
+    public void CoinBet(int a)
+    {
+        betCoin += a;
+    } 
+
     private void Awake()
     {
         cardManager = manager.GetComponent<CardGameManager>();
