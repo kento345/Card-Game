@@ -8,7 +8,6 @@ public class PlayerController : CharacterBase
     IEnumerator Start()
     {
         yield return StartCoroutine(SetCard(2));
-        SetText();
     }
 
     private void Update()

@@ -9,7 +9,6 @@ public class EnemyController : CharacterBase
     IEnumerator Start()
     {
         yield return StartCoroutine(SetCard(2));
-        SetText();
     }
 
     public override void AddCard(CardData data) 

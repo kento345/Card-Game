@@ -90,7 +90,7 @@ public class CardGameManager : MonoBehaviour
             }
             card.transform.position = transform.position;
             //移動
-            CardMove.CardMve(card, new Vector3(pos.x + chara.CardCount()-1, obj.y, pos.z - chara.CardCount() + 1), 0.5f);
+            CardMove.CardMve(card, new Vector3(pos.x + chara.CardCount() - 1, obj.y, pos.z - chara.CardCount() + 1), 0.5f);
             yield return new WaitForSeconds(0.5f);
         }
     }

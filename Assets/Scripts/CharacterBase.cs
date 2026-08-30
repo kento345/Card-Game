@@ -15,12 +15,15 @@ public class CharacterBase : MonoBehaviour
     //出た数字の合計
     protected int cardCount = 0;
     protected int number = 0;
+    protected int Coin = 300;
+    protected int betCoin = 0;
 
     //カードマネージャのScript
     protected CardGameManager cardManager = null;
 
     public int CardCount() => cardCount;
     public int Number() => number;
+    public int BetCoin() => betCoin;
 
     /// <summary>
     /// 数字計算
@@ -32,6 +35,8 @@ public class CharacterBase : MonoBehaviour
 
         cardCount++;
         number += (int)data.NumberData();
+
+        SetText();
     }
 
     private void Awake()
