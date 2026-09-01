@@ -8,7 +8,8 @@ public class EnemyController : CharacterBase
 
     IEnumerator Start()
     {
-        yield return StartCoroutine(SetCard(2));
+        yield return new WaitForSeconds(1.0f);
+        StartCoroutine(SetCard(2));
     }
 
     public override void AddCard(CardData data) 

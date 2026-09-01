@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿using NUnit.Framework;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,8 +17,9 @@ public class CharacterBase : MonoBehaviour
     //出た数字の合計
     protected int cardCount = 0;
     protected int number = 0;
-    protected int Coin = 300;
+    protected int coin = 300;
     protected int betCoin = 0;
+    private int aceCount_ = 0;
 
     //カードマネージャのScript
     protected CardGameManager cardManager = null;
@@ -24,6 +27,7 @@ public class CharacterBase : MonoBehaviour
     public int CardCount() => cardCount;
     public int Number() => number;
     public int BetCoin() => betCoin;
+    public int Coin() => coin;
 
     /// <summary>
     /// 数字計算
@@ -32,9 +36,18 @@ public class CharacterBase : MonoBehaviour
     public virtual void AddCard(CardData data)
     {
         if(data == null)return;
+        var card = data.NumberData();
+        if (card == global::Number.Ace)
+        {
+            aceCount_++;
+            number += 1;
+        }
+        else
+        {
+            number += (int)data.NumberData();
 
+        }
         cardCount++;
-        number += (int)data.NumberData();
 
         SetText();
     }
@@ -43,6 +56,10 @@ public class CharacterBase : MonoBehaviour
     {
         betCoin += a;
     } 
+    public void ResetCoinBet()
+    {
+        betCoin = 0;
+    }
 
     private void Awake()
     {
@@ -57,12 +74,23 @@ public class CharacterBase : MonoBehaviour
     
     public virtual void SetText()
     {
+        int displayNumber = number;
+
+        if (aceCount_ > 0 && number + 10 <= 21)
+        {
+            displayNumber += 10;
+        }
         numImage.enabled = true;
-        numText.text = number.ToString();
+        numText.text = displayNumber.ToString();
     }
 
     public virtual void Hit()
     {
         StartCoroutine(cardManager.ChangeNumvber(this.gameObject.transform.position, 1,this));
-    } 
+    }
+
+    public int CoinNum()
+    {
+        return betCoin;
+    }
 }

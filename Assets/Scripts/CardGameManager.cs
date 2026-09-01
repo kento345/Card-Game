@@ -20,7 +20,7 @@ public enum Suit
 public enum Number
 {
     Ace = 1,Two,Three,Four,Five,Six,Seven,
-    Eight,Nine,Ten,Jack,Queen,King
+    Eight,Nine,Ten,Jack = 10,Queen = 10,King = 10
 };
 
 /// <summary>
@@ -74,7 +74,7 @@ public class CardGameManager : MonoBehaviour
     public IEnumerator ChangeNumvber(Vector3 obj,int count,CharacterBase chara)
     {        
         //生成場所
-        var pos = transform.position;
+        //var pos = transform.position;
         for (int j = 0; j <= count - 1; j++)
         {
             //カード情報
@@ -90,7 +90,7 @@ public class CardGameManager : MonoBehaviour
             }
             card.transform.position = transform.position;
             //移動
-            CardMove.CardMve(card, new Vector3(pos.x + chara.CardCount() - 1, obj.y, pos.z - chara.CardCount() + 1), 0.5f);
+            CardMove.CardMve(card, new Vector3(obj.x + chara.CardCount() - 1, obj.y, obj.z - chara.CardCount() + 1), 0.5f);
             yield return new WaitForSeconds(0.5f);
         }
     }
@@ -105,7 +105,6 @@ public class CardGameManager : MonoBehaviour
         var t = Instantiate(card, new Vector3(0, 0, 0), Quaternion.identity);
         t.GetComponent<SpriteRenderer>().sprite = data.SpriteData();
 
-        //cardList.Remove();
         return t;
    }
 
@@ -150,10 +149,5 @@ public class CardGameManager : MonoBehaviour
         {
             cardList.Add(data);
         }
-    }
-
-    public (int player, int firstEnemy, int enemy) Num()
-    {
-        return (playerNum,enemyNumFirst, enemyNum);
     }
 }
