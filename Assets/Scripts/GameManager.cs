@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
-    //private UIManager uiManager;          //UIManager
+    private JugeMentManager jugeManager;                   //JugeMentManager
 
     [SerializeField] private CharacterBase player_;　　　　//playerScript
     [SerializeField] private Canvas canv_;                 //CanvasObj
@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
         }
         Instance = this;
         //------Script取得-------
-        //uiManager = new UIManager();
+        jugeManager = new JugeMentManager();
         //-----------------------
         //Time.timeScale = 0f;
         haveCoinText_.text = "所有数: "+ player_.Coin().ToString();

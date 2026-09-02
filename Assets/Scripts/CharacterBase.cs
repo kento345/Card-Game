@@ -20,6 +20,8 @@ public class CharacterBase : MonoBehaviour
     protected int coin = 300;
     protected int betCoin = 0;
     private int aceCount_ = 0;
+    private int num = 0;
+
 
     //カードマネージャのScript
     protected CardGameManager cardManager = null;
@@ -40,11 +42,11 @@ public class CharacterBase : MonoBehaviour
         if (card == global::Number.Ace)
         {
             aceCount_++;
-            number += 1;
+            num += 1;
         }
         else
         {
-            number += (int)data.NumberData();
+            num += (int)data.NumberData();
 
         }
         cardCount++;
@@ -74,14 +76,15 @@ public class CharacterBase : MonoBehaviour
     
     public virtual void SetText()
     {
-        int displayNumber = number;
+        int displayNumber = num;
 
-        if (aceCount_ > 0 && number + 10 <= 21)
+        if (aceCount_ > 0 && num + 10 <= 21)
         {
             displayNumber += 10;
         }
         numImage.enabled = true;
         numText.text = displayNumber.ToString();
+        number = displayNumber;
     }
 
     public virtual void Hit()

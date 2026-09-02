@@ -4,11 +4,31 @@ public class JugeMentManager
 {
     public enum Juge
     {
-        win,lose, draw,
+        none,win,lose, draw,
     }
 
     public Juge JugeMent(int player,int enemy)
     {
-        return Juge.win;
+        var j = Juge.none;
+        if(player > 21)
+        {
+            j = Juge.lose;
+        }
+        else if(player< 21)
+        {
+            if(player > enemy)
+            {
+                j = Juge.win;
+            }
+            else if(player < enemy)
+            {
+                j = Juge.lose;
+            }
+            else if(player == enemy) 
+            {
+                j = Juge.draw;
+            }
+        }
+        return j;
     }
 }
