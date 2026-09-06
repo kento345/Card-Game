@@ -50,14 +50,6 @@ public class CardGameManager : MonoBehaviour
     private List<CardDataList> cardList = new();
     //-----------------
 
-    //カード生成数
-    int playerCount = 0;
-    int enemyCount = 0;
-
-    //数字
-    int playerNum = 0;
-    int enemyNum = 0;
-    int enemyNumFirst = 0;
 
     void Awake()
     {

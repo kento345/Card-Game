@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,9 +20,8 @@ public class CharacterBase : MonoBehaviour
     protected int number = 0;
     protected int coin = 300;
     protected int betCoin = 0;
-    private int aceCount_ = 0;
-    private int num = 0;
-
+    protected int aceCount_ = 0;
+    protected int num = 0;
 
     //カードマネージャのScript
     protected CardGameManager cardManager = null;
@@ -69,11 +69,21 @@ public class CharacterBase : MonoBehaviour
         numText = numImage.GetComponentInChildren<Text>();
     }
 
-    protected IEnumerator SetCard(int count)
+    protected void Start()
     {
-        yield return StartCoroutine(cardManager.ChangeNumvber(this.gameObject.transform.position, count, this));
+        Debug.Log("開始");
+        //yield return new WaitForSeconds(1.0f);
+        GameManager.Instance.stateChanged += OnStateChanged;
     }
-    
+    private void OnStateChanged(GameState state)
+    {
+        if (GameManager.Instance.Stated() == GameState.Dealing)
+        {
+            Debug.Log("配布");
+            StartCoroutine(cardManager.ChangeNumvber(this.gameObject.transform.position, 2, this));
+        }
+    }
+
     public virtual void SetText()
     {
         int displayNumber = num;
@@ -85,6 +95,11 @@ public class CharacterBase : MonoBehaviour
         numImage.enabled = true;
         numText.text = displayNumber.ToString();
         number = displayNumber;
+
+        if (cardCount == 2)
+        {
+            GameManager.Instance.StateUpdate(GameState.PlayerTurn);
+        }
     }
 
     public virtual void Hit()
@@ -92,8 +107,27 @@ public class CharacterBase : MonoBehaviour
         StartCoroutine(cardManager.ChangeNumvber(this.gameObject.transform.position, 1,this));
     }
 
+    public virtual void Stand()
+    {
+        Debug.Log("キープ");
+        GameManager.Instance.StateUpdate(GameState.DealerTurn);
+    }
+
+    public virtual void DoubleDown()
+    {
+
+    }
+
     public int CoinNum()
     {
         return betCoin;
+    }
+
+    protected void OnDestroy()
+    {
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.stateChanged -= OnStateChanged;
+        }
     }
 }

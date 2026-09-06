@@ -6,12 +6,6 @@ using UnityEngine.UI;
 
 public class PlayerController : CharacterBase
 {
-    IEnumerator Start()
-    {
-        yield return new WaitForSeconds(1.0f);
-        StartCoroutine(SetCard(2));
-    }
-
     private void Update()
     {
         if (number > 21)

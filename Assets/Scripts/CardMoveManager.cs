@@ -6,4 +6,6 @@ public static class CardMove
     {
         card.transform.DOMove(targetPos, duration);
     }
+
+    //public static void CardRota()
 }

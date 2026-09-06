@@ -1,9 +1,18 @@
 using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-
+public enum GameState
+{
+    None,       // 初期状態
+    Bet,        // ベット待ち
+    Dealing,    // 最初のカードを配る
+    PlayerTurn, // プレイヤーの行動中
+    DealerTurn, // ディーラーの行動中
+    Result      // 勝敗判定・結果表示
+}
 
 public class GameManager : MonoBehaviour
 {
@@ -11,12 +20,19 @@ public class GameManager : MonoBehaviour
     private JugeMentManager jugeManager;                   //JugeMentManager
 
     [SerializeField] private CharacterBase player_;　　　　//playerScript
+    [SerializeField] private CharacterBase enemy_;         //enemyScript
     [SerializeField] private Canvas canv_;                 //CanvasObj
     [SerializeField] private Image coin;                   //コインPrefab
     [SerializeField] private List<Sprite> coins_ = new();　//コインSprite
     [SerializeField] private Text coinText_;               //コインText
     [SerializeField] private Text haveCoinText_;           //所有コインText
     List<Image> beforeObj = new();                         //前回生成したコイン
+
+    protected GameState state { get; private set; } = GameState.None;
+
+    //イベント
+    public event Action<GameState> stateChanged;
+    public GameState Stated() => state;
 
 
     void Awake()
@@ -31,9 +47,11 @@ public class GameManager : MonoBehaviour
         //------Script取得-------
         jugeManager = new JugeMentManager();
         //-----------------------
+        StateUpdate(GameState.Bet);
         //Time.timeScale = 0f;
         haveCoinText_.text = "所有数: "+ player_.Coin().ToString();
     }
+
 
     /// <summary>
     /// ベット数,コイン生成,
@@ -79,7 +97,7 @@ public class GameManager : MonoBehaviour
         if(player_.CoinNum() > 0)
         {
             canv_.enabled = false;
-            Time.timeScale = 1.0f;
+            StateUpdate(GameState.Dealing);
         }
     }
 
@@ -88,7 +106,7 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void Reset()
     {
-        if(Time.timeScale == 0.0f)
+        if(Stated() == GameState.Bet)
         {
             player_.ResetCoinBet();
             foreach(var coin in beforeObj)
@@ -98,5 +116,17 @@ public class GameManager : MonoBehaviour
             beforeObj.Clear();
             coinText_.text = "Bet数: " + player_.CoinNum().ToString();
         }
+    }
+
+    public void StateUpdate(GameState s)
+    {
+        if (state == s) return;
+        state = s;
+        stateChanged?.Invoke(s);
+    }
+
+    public GameObject obj()
+    {
+        return gameObject;
     }
 }

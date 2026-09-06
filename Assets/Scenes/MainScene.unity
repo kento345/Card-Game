@@ -280,7 +280,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 128837426}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 150644757}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: DoubleDown
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &128837426
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1301,6 +1313,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   player_: {fileID: 150644757}
+  enemy_: {fileID: 1767432192}
   canv_: {fileID: 1079364461}
   coin: {fileID: 9015162554112361772, guid: 80c9364fb47374348944dd84a079d34f, type: 3}
   coins_:
@@ -1883,7 +1896,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1079364459
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2484,6 +2497,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   manager: {fileID: 386346990}
   numImage: {fileID: 1385936225}
+  player_: {fileID: 150644757}
+  nums: 
 --- !u!1 &1799528352
 GameObject:
   m_ObjectHideFlags: 0
@@ -2652,7 +2667,7 @@ GameObject:
   - component: {fileID: 1948461603}
   - component: {fileID: 1948461602}
   m_Layer: 5
-  m_Name: Stay
+  m_Name: Stand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2721,7 +2736,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1948461603}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 150644757}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: Stand
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1948461603
 MonoBehaviour:
   m_ObjectHideFlags: 0
