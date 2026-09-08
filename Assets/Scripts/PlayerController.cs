@@ -8,10 +8,10 @@ public class PlayerController : CharacterBase
 {
     private void Update()
     {
-        if (number > 21)
+        /*if (number > 21)
         {
             Debug.LogError("バースト");
-        }
+        }*/
     }
 
 }

@@ -48,6 +48,8 @@ public class CardGameManager : MonoBehaviour
     /// 使用カードデータ
     /// </summary>
     private List<CardDataList> cardList = new();
+
+    private GameObject CardObj;
     //-----------------
 
 
@@ -73,12 +75,14 @@ public class CardGameManager : MonoBehaviour
             var data = DrawCard();
             //情報を元にカード生成
             var card = SpownCard(data);
+            card.name = "Card" + j;
             //カード情報を渡す
             chara.AddCard(data);
             if (data == null){yield break;}
             if (chara is EnemyController && chara.CardCount() == 2)
             {
                 card.transform.rotation = Quaternion.Euler(0, 180, 0);
+                CardObj = card;
             }
             card.transform.position = transform.position;
             //移動
@@ -141,5 +145,10 @@ public class CardGameManager : MonoBehaviour
         {
             cardList.Add(data);
         }
+    }
+
+    public GameObject cardObj()
+    {
+        return CardObj;
     }
 }

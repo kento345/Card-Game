@@ -1,8 +1,9 @@
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using static JugeMentManager;
 
 public enum GameState
 {
@@ -17,7 +18,7 @@ public enum GameState
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
-    private JugeMentManager jugeManager;                   //JugeMentManager
+    public JugeMentManager jugeManager;                   //JugeMentManager
 
     [SerializeField] private CharacterBase player_;　　　　//playerScript
     [SerializeField] private CharacterBase enemy_;         //enemyScript
@@ -25,10 +26,12 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Image coin;                   //コインPrefab
     [SerializeField] private List<Sprite> coins_ = new();　//コインSprite
     [SerializeField] private Text coinText_;               //コインText
+    [SerializeField] private Text coinNumText_;            //コイン数Text
     [SerializeField] private Text haveCoinText_;           //所有コインText
     List<Image> beforeObj = new();                         //前回生成したコイン
 
-    protected GameState state { get; private set; } = GameState.None;
+
+    public GameState state { get; private set; } = GameState.None;
 
     //イベント
     public event Action<GameState> stateChanged;
@@ -52,6 +55,11 @@ public class GameManager : MonoBehaviour
         haveCoinText_.text = "所有数: "+ player_.Coin().ToString();
     }
 
+    private void Start()
+    {
+        stateChanged += OnStateEvent;
+        jugeManager.jugeEvent += OnJugeEvent;
+    }
 
     /// <summary>
     /// ベット数,コイン生成,
@@ -85,7 +93,8 @@ public class GameManager : MonoBehaviour
             beforeObj.Add(obj);
 
             player_.CoinBet(num);
-            coinText_.text = "Bet数: " + player_.CoinNum().ToString();
+            coinText_.text = "BET: " + player_.CoinNum().ToString();
+            UpdateText();
         }
     }
     
@@ -114,7 +123,7 @@ public class GameManager : MonoBehaviour
                 Destroy(coin.gameObject);
             }
             beforeObj.Clear();
-            coinText_.text = "Bet数: " + player_.CoinNum().ToString();
+            coinText_.text = "BET: " + player_.CoinNum().ToString();
         }
     }
 
@@ -125,8 +134,34 @@ public class GameManager : MonoBehaviour
         stateChanged?.Invoke(s);
     }
 
-    public GameObject obj()
+    public void UpdateText()
     {
-        return gameObject;
+        coinNumText_.text = "BET: " + player_.CoinNum().ToString();
+    }
+
+    void OnStateEvent(GameState state)
+    {
+        if (state == GameState.DealerTurn)
+        {
+            jugeManager.JugeMent(player_.Number(), enemy_.Number());
+        }
+        if (state == GameState.Result)
+        {
+            jugeManager.JugeMent(player_.Number(), enemy_.Number());
+        }
+    }
+
+    void OnJugeEvent(Juge juge)
+    {
+        Debug.Log("判定結果: " + juge.ToString());
+    }
+
+    private void OnDestroy()
+    {
+        stateChanged += OnStateEvent;
+        if (jugeManager != null)
+        {
+            jugeManager.jugeEvent -= OnJugeEvent;
+        }
     }
 }

@@ -47,7 +47,6 @@ public class CharacterBase : MonoBehaviour
         else
         {
             num += (int)data.NumberData();
-
         }
         cardCount++;
 
@@ -71,17 +70,19 @@ public class CharacterBase : MonoBehaviour
 
     protected void Start()
     {
-        Debug.Log("開始");
-        //yield return new WaitForSeconds(1.0f);
         GameManager.Instance.stateChanged += OnStateChanged;
     }
     private void OnStateChanged(GameState state)
     {
-        if (GameManager.Instance.Stated() == GameState.Dealing)
+        if (state == GameState.Dealing)
         {
-            Debug.Log("配布");
             StartCoroutine(cardManager.ChangeNumvber(this.gameObject.transform.position, 2, this));
         }
+/*        if (GameManager.Instance.Stated() == GameState.Result)
+        {
+            numImage.enabled = false;
+            numText.text = "";
+        }*/
     }
 
     public virtual void SetText()
@@ -109,7 +110,6 @@ public class CharacterBase : MonoBehaviour
 
     public virtual void Stand()
     {
-        Debug.Log("キープ");
         GameManager.Instance.StateUpdate(GameState.DealerTurn);
     }
 

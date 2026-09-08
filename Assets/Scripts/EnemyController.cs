@@ -7,21 +7,14 @@ using UnityEngine;
 public class EnemyController : CharacterBase
 {
     [SerializeField] private CharacterBase player_;
-
-    [SerializeField]
     private List<int> nums = new();
-    [SerializeField]
-    private GameObject c;
 
     private void Update()
     {
-        if(GameManager.Instance.Stated() == GameState.DealerTurn)
+        if(GameManager.Instance.Stated() == GameState.DealerTurn && GameManager.Instance.jugeManager.Juged() != Juge.lose)
         {
-            if (number < 21 && number < player_.Number())
-            {
-                Hit();
-                SetText();
-            }
+            CardMove.CardRota(cardManager.cardObj(), Quaternion.Euler(0, 0, 0), 0.3f);
+            StartCoroutine(HIT());
         }
     }
 
@@ -55,5 +48,17 @@ public class EnemyController : CharacterBase
 
         numImage.enabled = true;
         numText.text = (GameManager.Instance.Stated() == GameState.PlayerTurn?displayNumber : number).ToString();
+    }
+
+    IEnumerator HIT()
+    {
+        yield return new WaitForSeconds(1.0f);
+        if (number < 21 && number <= player_.Number())
+        {
+            Hit();
+            SetText();
+            yield return new WaitForSeconds(.5f);
+        }
+        GameManager.Instance.StateUpdate(GameState.Result);
     }
 }
